@@ -3,15 +3,20 @@
 {% block content %}
 <div class="centerstage">
 
-
     {% for post in post_list %}
         <div class="post">
 
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <div class="date">
-                <p>Published on: {{ post.publish_date|date:"D M Y"}}</p>
+            <div class="article">
+              <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+              <p>{{ post.snippet }}</p>
             </div>
-            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approveComment.count }}</a>
+
+            <div class="date">
+              <p><b>Published on: </b> {{ post.publish_date|date:"D M Y"}}</p>
+            </div>
+            <div class="comment">
+              <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.approveComment.count }}</a>
+            </div>
         </div>
     {% endfor %}
 </div>
