@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 <html>
     <head>
         <title>MyBlog</title>
@@ -8,6 +8,7 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 
         {# MEDIUM STYLE EDITOR#}
         <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
@@ -32,8 +33,8 @@
 
 
       <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">Home</a></li>
-        <li><a href="{% url 'about'%}">About</a></li>
+        <li><a class='navbar-brand bigbrand' href="{% url 'blog_app:post_list' %}">Home</a></li>
+        <li><a href="{% url 'blog_app:about'%}">About</a></li>
         <li><a href="https://www.github.com">Github</a></li>
         <li><a href="https://www.linkedin.com">LinkedIn</a></li>
 
@@ -42,22 +43,22 @@
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
         <li>
-          <a href="{% url 'new_post' %}" >New Post</a>
+          <a href="{% url 'blog_app:new_post' %}" >New Post</a>
         </li>
 
         <li>
-          <a href="{% url 'draft_post_list' %}">Drafts</a>
+          <a href="{% url 'blog_app:draft_post_list' %}">Drafts</a>
         </li>
         <li>
-          <a href="{% url 'logout' %}" >Logout</a>
+          <a href="{% url 'accounts:logout' %}" >Logout</a>
         </li>
 
         <li>
           <a >Welcome: {{ user.username }}</a>
         </li>
           {% else %}
-          <li><a class='nav navbar-right' href="{% url 'login' %}" >Login</a></li>
-          
+          <li><a class='nav navbar-right' href="{% url 'accounts:login' %}" >Login</a></li>
+          <li><a class='nav navbar-right' href="{% url 'accounts:signup' %}" >Signup</a></li>
         {% endif %}
 
       </ul>
