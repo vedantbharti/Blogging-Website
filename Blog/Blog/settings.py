@@ -23,7 +23,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'blog_app/templates/blog_app')
 SECRET_KEY = '*=2n29f%+#jx^x0@2os&)!4bnvsv-=ciobo-r#j6!v3@gbt36i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mediumeditor',
     'bootstrap4',
     'crispy_forms',
     'blog_app',
@@ -127,4 +126,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-DEBUG = False
+DEBUG = True
