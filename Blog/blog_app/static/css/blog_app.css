@@ -1,12 +1,17 @@
 body {
-  background-image: url('/static/image1.jpg');
-  background-color : #212123;
+  background-color : rgb(61,173,170);
   background-repeat: repeat;
+  color: black;
   background-size: 1540px 750px;
+}
+
+a{
+  color: rgb(0,20,20);
 }
 
 .techfont{
   font-family: 'Russo One', sans-serif;
+  color: rgb(0,20,20);
   font-size: 1.5em;
   margin-bottom: 10px;
 }
@@ -17,6 +22,7 @@ body {
 
 .posttitle{
   font-family: 'Russo One', sans-serif;
+  color: rgb(0,20,20);
   font-size: 3em;
   text-align: center;
 }
@@ -24,11 +30,6 @@ body {
 .postcontent{
   font-family: 'Montserrat';
   font-size: 1.5em;
-}
-
-.centerstage{
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .btn-comment{

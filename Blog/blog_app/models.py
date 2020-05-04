@@ -8,8 +8,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now)
     publish_date = models.DateTimeField(blank=True,null=True)
@@ -28,7 +28,7 @@ class Post(models.Model):
         return self.title
 
     def snippet(self):
-        return self.text[:100] + '...'
+        return self.text[:300] + '...'
 
 class Comment(models.Model):
     post = models.ForeignKey('blog_app.Post',related_name='comments', on_delete=models.CASCADE)

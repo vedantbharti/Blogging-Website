@@ -11,6 +11,7 @@ class PostForm(forms.ModelForm):
             'text':forms.Textarea(),
         }
 
+    field_order = ['title', 'author', 'text']
 
 class CommentForm(forms.ModelForm):
     class Meta():
@@ -21,3 +22,5 @@ class CommentForm(forms.ModelForm):
             'author':forms.TextInput(attrs={'class':'textinputclass'}),
             'text':forms.Textarea(),
         }
+
+    field_order = ['author', 'text']

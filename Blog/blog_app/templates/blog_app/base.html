@@ -3,12 +3,13 @@
 <html>
     <head>
         <title>MyBlog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
         {# MEDIUM STYLE EDITOR#}
         <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
@@ -27,61 +28,47 @@
 
 <body class='loader'>
 
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand"><b>WriteIn</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="{% url 'blog_app:post_list' %}"><b>Home</b></a>
+      <a class="nav-item nav-link active" href="{% url 'blog_app:about'%}"><b>About</b></a>
+      <a class="nav-item nav-link active" href="https://www.github.com"><i class='fab fa-github' style='font-size:20px'></i></a>
+      <a class="nav-item nav-link active" href="https://www.linkedin.com"><i class='fab fa-linkedin-in' style='font-size:20px'></i></a>
 
-  <nav class="navbar navbar-default techfont custom-navbar">
-    <div class="container">
-
-
-      <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'blog_app:post_list' %}">Home</a></li>
-        <li><a href="{% url 'blog_app:about'%}">About</a></li>
-        <li><a href="https://www.github.com">Github</a></li>
-        <li><a href="https://www.linkedin.com">LinkedIn</a></li>
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        {% if user.is_authenticated %}
-        <li>
-          <a href="{% url 'blog_app:new_post' %}" >New Post</a>
-        </li>
-
-        <li>
-          <a href="{% url 'blog_app:draft_post_list' %}">Drafts</a>
-        </li>
-        <li>
-          <a href="{% url 'accounts:logout' %}" >Logout</a>
-        </li>
-
-        <li>
-          <a >Welcome: {{ user.username }}</a>
-        </li>
-          {% else %}
-          <li><a class='nav navbar-right' href="{% url 'accounts:login' %}" >Login</a></li>
-          <li><a class='nav navbar-right' href="{% url 'accounts:signup' %}" >Signup</a></li>
-        {% endif %}
-
-      </ul>
+      {% if user.is_authenticated %}
+        <a class="nav-item nav-link active" href="{% url 'blog_app:new_post' %}" ><b>New Post</b></a>
+        <a class="nav-item nav-link active" href="{% url 'blog_app:draft_post_list' %}"><b>Drafts</b></a>
+        <a class="nav-item nav-link active" href="{% url 'accounts:logout' %}" ><b>Logout</b></a>
+        <span class="navbar-text">
+          <b>Welcome: {{ user.username }}</b>
+        </span>
+        {% else %}
+          <a class="nav-item nav-link active" href="{% url 'accounts:login' %}" ><b>Login</b></a>
+          <a class="nav-item nav-link active" href="{% url 'accounts:signup' %}" ><b>Signup</b></a>
+      {% endif %}
+    </div>
   </div>
+  <form action="{% url 'blog_app:search_results' %}" method="get" class="form-inline">
+    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
 </nav>
 
   {# The actual blog posts#}
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                  <div class="blog_posts">
-                    {% block content %}
-                    {% endblock %}
-
-                  </div>
-
-                </div>
-            </div>
+        <div class="container">
+          {% block content %}
+          {% endblock %}
         </div>
 
 {# SCRIPTS#}
-
+<script type="text/javascript">
+  document.getElementById("id_q").value="{{query}}"
+</script>
 <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
-
 </body>
 </html>

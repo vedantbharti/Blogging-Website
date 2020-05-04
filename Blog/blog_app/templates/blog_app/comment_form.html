@@ -2,10 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>New comment</h1>
-    <form method="POST" class="post-form">
+    <form method="POST" novalidate>
     {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="save btn btn-default">Post Comment</button>
+    <div class="row">
+      <div class="col-6">
+        {{form.author|as_crispy_field}}
+      </div>
+    </div>
+    {{form.text|as_crispy_field}}
+    <button type="submit" class="btn btn-success">Post Comment</button>
     </form>
 
     <script>var editor = new MediumEditor('.editable');</script>

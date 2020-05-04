@@ -17,30 +17,37 @@
       <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
 
 
-      {% if user.is_authenticated %}
-          <a class="btn btn-primary" href="{% url 'blog_app:edit_post' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-          <a class="btn btn-primary" href="{% url 'blog_app:delete_post' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+      {% if user.is_authenticated and request.user.id == post.author.id %}
+          <a class="btn btn-primary" href="{% url 'blog_app:edit_post' pk=post.pk %}"><i class='fas fa-edit' style='font-size:15px;color:black'></i></a>
+          <a class="btn btn-primary" href="{% url 'blog_app:delete_post' pk=post.pk %}"><i class='fas fa-trash' style='font-size:15px;color:black'></i></a>
       {% endif %}
 
 
 
   <hr>
-  <a class="btn btn-primary btn-comment" href="{% url 'blog_app:add_comment_to_post' pk=post.pk %}">Add comment</a>
-  <div class="container">
+  <a class="btn btn-primary btn-comment" style="margin-bottom:100px; margin-right:210px" href="{% url 'blog_app:add_comment_to_post' pk=post.pk %}">Add comment</a>
 
+  <div class="container">
 
   {% for comment in post.comments.all %}
   <br>
       {% if user.is_authenticated or comment.approve_comment %}
 
-              {{ comment.create_date }}
-              {% if not comment.approve_comment %}
-                  <a class="btn btn-default" href="{% url 'blog_app:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                  <a class="btn btn-default" href="{% url 'blog_app:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+              {% if comment.approve_comment%}
+                {{ comment.create_date }}
+                <p>{{ comment.text|safe|linebreaks }}</p>
+                <p>Posted by: <strong>{{ comment.author }}</strong></p>
               {% endif %}
 
-          <p>{{ comment.text|safe|linebreaks }}</p>
-          <p>Posted by: <strong>{{ comment.author }}</strong></p>
+              {% if not comment.approve_comment %}
+                  {% if user.id == post.author.id %}
+                    {{ comment.create_date }}
+                    <p>{{ comment.text|safe|linebreaks }}</p>
+                    <p>Posted by: <strong>{{ comment.author }}</strong></p>
+                    <a class="btn btn-default" href="{% url 'blog_app:comment_remove' pk=comment.pk %}"><i class='fas fa-trash' style='font-size:15px;color:black'></i></a>
+                    <a class="btn btn-default" href="{% url 'blog_app:comment_approve' pk=comment.pk %}"><i class="fas fa-check" style='font-size:15px;color:black'></i></a>
+                  {% endif %}
+              {% endif %}
 
       {% endif %}
   {% empty %}
