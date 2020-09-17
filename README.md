@@ -4,5 +4,5 @@ This site is a blogging site in which a user can login, create, draft, edit and 
 a comment on the posts which will be approved by admin. If approved by admin, the comment will be visible along with the post on the 
 homepage else it will not be visible. The user can also login and logout without going to admin portal.
 
-Screenshots are of different pages
+You can check the website at https://writein.pythonanywhere.com/
 
